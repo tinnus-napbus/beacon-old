@@ -18,12 +18,10 @@
 |%
 +$  versioned-state
   $%  state-zero
+      state-1
   ==
-+$  state-zero  $:
-      %zero
-      auto=url:beacon
-      bids=ships:beacon
-    ==
++$  state-zero  [%zero auto=url:beacon bids=ships:beacon]
++$  state-1  [%1 *]
 +$  card  card:agent:gall
 --
 %-  agent:dbug
@@ -48,8 +46,25 @@
   |=  old-state=vase
   ^-  (quip card _this)
   =/  old  !<(versioned-state old-state)
-  ?-  -.old
-    %zero  `this(state old)
+  ?-    -.old
+      %zero
+    `this(state old)
+  ::
+      %1
+    =/  cards=(list card)
+      %+  weld
+        %+  turn  ~(tap by sup.bowl)
+        |=  [* =ship =path]
+        ^-  card
+        [%give %kick ~[path] `ship]
+      %+  turn  ~(tap by wex.bowl)
+      |=  [[=wire =ship =term] *]
+      ^-  card
+      [%pass wire %agent [ship term] %leave ~]
+    =.  cards
+      :_  cards
+      [%pass /eyre %arvo %e %connect [~ /'beacon'] %beacon]
+    [cards this]
   ==
 ::
 ++  on-poke
